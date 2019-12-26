@@ -93,6 +93,6 @@ tipue_search:
     pages: false
     collections: []
     exclude:
-      files: [search.html, index.html, example/, tags/index.html, tags/, about.md, /archive/, /archive/index.html]
+      files: [search.html, index.html, example/, tags/index.html, tags/, about.md, archive/, archive/index.html]
       categories: []
       tags: []
