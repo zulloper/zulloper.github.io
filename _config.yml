@@ -85,5 +85,11 @@ gems:
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-admin
+  -
+tipue_search:
+  include:
+    pages: true
+  exclude:
+    files: [search.html, index.html, /tags/index.html, /tags/, /about/, /about/about.html, /archive/, /archive/index.html]
 
 exclude:            [vendor]
