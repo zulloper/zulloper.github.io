@@ -86,10 +86,10 @@ gems:
   - jekyll-paginate
   - jekyll-admin
 
+exclude:            [vendor]
+
 tipue_search:
   include:
     pages: true
   exclude:
-    files: [search.html, index.html, /example/, /tags/index.html, /tags/, /about/, /about/about.html, /archive/, /archive/index.html]
-
-exclude:            [vendor]
+    files: [search.html, index.html, example/, tags/index.html, tags/, about.md, /archive/, /archive/index.html]
