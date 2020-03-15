@@ -3,59 +3,59 @@ layout: default
 ---
 
 <header class="header">
-  <div class="header-title">
-    <a href="{{ site.url }}{{ site.baseurl }}">{{ site.name }}</a>
-  </div>
-  <nav class="header-nav">
-    {% for nav in site.nav %}
-    {% if nav.url contains 'http://' or nav.url contains 'https://' %}
-    <a href="{{ nav.url }}">{{ nav.name }}</a>
-    {% else %}
-    <a href="{{ nav.url | prepend: site.baseurl }}">{{ nav.name }}</a>
-    {% endif %}
-    {% endfor %}
+    <div class="header-title">
+        <a href="{{ site.url }}{{ site.baseurl }}">{{ site.name }}</a>
+    </div>
+    <nav class="header-nav">
+        {% for nav in site.nav %}
+        {% if nav.url contains 'http://' or nav.url contains 'https://' %}
+        <a href="{{ nav.url }}">{{ nav.name }}</a>
+        {% else %}
+        <a href="{{ nav.url | prepend: site.baseurl }}">{{ nav.name }}</a>
+        {% endif %}
+        {% endfor %}
 
-    <form action="/search" style="float:right;">
-      <div class="tipue_search_left">
-        <img src="/assets/tipuesearch/search.png" class="tipue_search_icon">
-      </div>
-      <div class="tipue_search_right">
-        <input type="text" name="q" id="tipue_search_input" pattern=".{1,}" title="At least 1 characters" required></div>
-      <div style="clear: both;"></div>
-    </form>
-  </nav>
+        <form action="/search" style="float:right;">
+            <div class="tipue_search_left">
+                <img src="/assets/tipuesearch/search.png" class="tipue_search_icon">
+            </div>
+            <div class="tipue_search_right">
+                <input type="text" name="q" id="tipue_search_input" pattern=".{1,}" title="At least 1 characters"
+                       required></div>
+            <div style="clear: both;"></div>
+        </form>
+    </nav>
 </header>
 
 <div class="list">
-{% if site.posts.size == 0 %}
-  <h2>No post found</h2>
-{% else %}
-<!-- This loops through the paginated posts -->
-{% for post in paginator.posts %}
-  <div class="list-post">
-    {% if post.link %}
-    <a href="{{ post.link }}">
+    {% if site.posts.size == 0 %}
+    <h2>No post found</h2>
     {% else %}
-    <a href="{{ post.url | prepend: site.baseurl }}">
-    {% endif %}  
-      <div class="list-post-date">
-        <time>{{ post.date | date_to_string }}</time>
-      </div>
-      <div class="list-post-title">
-        {{ post.title }}
-      </div>
-      {% if post.description %}
-      <div class="list-post-desc">
-        {{ post.description }}
-      </div>
-      {% endif %}
-    </a>
-
-
-  </div>
-{% endfor %}
-  <!-- Pagination links -->
-  <div class="list-pagination">
+    <!-- This loops through the paginated posts -->
+    {% for post in paginator.posts %}
+    <div class="list-post">
+        {% if post.link %}
+        <a href="{{ post.link }}">
+            {% else %}
+            <a href="{{ post.url | prepend: site.baseurl }}">
+                {% endif %}
+                <div class="list-post-date">
+                    <time>{{ post.date | date_to_string }}</time>
+                </div>
+                <div class="list-post-title">
+                    {{ post.title }}
+                </div>
+                {% if post.description %}
+                <div class="list-post-desc">
+                    {{ post.description }}
+                </div>
+                {% endif %}
+            </a>
+        </a>
+    </div>
+    {% endfor %}
+    <!-- Pagination links -->
+    <div class="list-pagination">
     <span class="list-pagination-previous">
       {% if paginator.previous_page %}
         <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="previous">
@@ -66,7 +66,7 @@ layout: default
       {% endif %}
     </span>
 
-    <span class="list-pagination-next">
+        <span class="list-pagination-next">
       {% if paginator.next_page %}
         <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="next">
           next &#xE001;
@@ -76,6 +76,6 @@ layout: default
       {% endif %}
     </span>
 
-  </div>
-{% endif %}
+    </div>
+    {% endif %}
 </div>

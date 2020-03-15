@@ -3,29 +3,44 @@
 /*--------------
   Font
   -------------- */
-$base-font: 'Spoqa Han Sans', 'Source Sans Pro', Apple SD Gothic Neo, Nanum Barun Gothic, Nanum Gothic, Verdana, Arial, Dotum, sans-serif;
-$code-font: Menlo, 'Ubuntu Mono', Monaco, 'Spoqa Han Sans', monospace;
+//$base-font: 'Spoqa Han Sans', 'Source Sans Pro', Apple SD Gothic Neo, Nanum Barun Gothic, Nanum Gothic, Verdana, Arial, Dotum, sans-serif;
+$base-font: 'Neodgm', 'Source Sans Pro', Apple SD Gothic Neo, Nanum Barun Gothic, Nanum Gothic, Verdana, Arial, Dotum, sans-serif;
+$code-font: 'Neodgm-Code', Menlo, 'Ubuntu Mono', Monaco, 'Spoqa Han Sans', monospace;
 $code-gist-font: Menlo, 'Ubuntu Mono', Monaco, 'Spoqa Han Sans', monospace;
 
-$base-font-size: 18px;
+$base-font-size: 16px;
 $base-font-size-sm: 14px;
 
-$mobile-font-size: 16px;
+$mobile-font-size: 14px;
 
+
+
+/*--------------
+  Test
+  -------------- */
+$color-primary: rgb(52, 165, 7);
+$color-warning: rgb(194, 5, 5);
+$color-bg: rgb(0, 0, 0);
+$color-postbg: rgb(0, 0, 0);
+$image-background: none;
 
 /*--------------
   Color
   -------------- */
-$base-color: $oc-gray-8;
+//$base-color: $oc-gray-8;
+$base-color: $color-primary;
 $base-lighten-color: $oc-gray-6;
 
-$background-color: $oc-white;
+//$background-color: $oc-white;
+$background-color: $color-bg;
 $background-over-color: $oc-gray-1;
 
-$text-color: $oc-gray-8;
+//$text-color: $oc-gray-8;
+$text-color: $oc-gray-1;
 $link-color: $oc-blue-8;
 $code-color: $oc-indigo-9;
-$code-background-color: $oc-gray-1;
+//$code-background-color: $oc-gray-1;
+$code-background-color: $oc-gray-6;
 $table-border-color: $oc-gray-2;
 $table-background-color: $oc-gray-1;
 

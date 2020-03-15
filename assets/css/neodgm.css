@@ -1,0 +1,14 @@
+/* font */
+@font-face {
+    font-family: 'Neodgm';
+    font-style: normal;
+    font-weight: 400;
+    src: local(※), url(/assets/fonts/neodgm/neodgm.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Neodgm-Code';
+    font-style: normal;
+    font-weight: 400;
+    src: local(※), url(/assets/fonts/neodgm/neodgm_code.woff2) format('woff2');
+}

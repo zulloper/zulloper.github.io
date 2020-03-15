@@ -36,7 +36,8 @@ a {
   Header
   -------------- */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+  font-weight: 100;
+  color: $color-primary;
 }
 
 h1 {
@@ -44,7 +45,8 @@ h1 {
   padding-bottom: 0.3em;
   font-size: 2.25em;
   line-height: 1.2em;
-  border-bottom: 1px solid #eee;
+  //border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $color-primary;
 }
 
 h2 {
@@ -52,7 +54,8 @@ h2 {
   padding-bottom: 0.3em;
   font-size: 1.75em;
   line-height: 1.225em;
-  border-bottom: 1px solid #eee;
+  //border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $color-primary;
 }
 
 h3 { 
@@ -191,7 +194,8 @@ dd {
 
 hr {
   border: 0;
-  border-top: 1px solid $divider-color;
+  //border-top: 1px solid $divider-color;
+  border-top: 1px solid $color-primary;
   margin: 1.5rem auto;
 }
 
