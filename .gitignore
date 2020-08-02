@@ -1,11 +1,24 @@
-_site/
-.sass-cache
+*.swp
+
+# Ruby Gem
+*.gem
+.bundle
 Gemfile.lock
+vendor/bundle
+
+# macOS
+.DS_Store
+
+# Jekyll generated files
+.jekyll-cache
+.jekyll-metadata
+.sass-cache
+_asset_bundler_cache
+_site
+
+#
 _drafts
 .jsbeautifyrc
 Rakefile
 .idea/
 /.idea/
-/.jekyll-cache/
-/_posts/.jekyll-cache/
-/Gemfile

@@ -1,11 +1,14 @@
 ---
+layout: page
 title: About
-permalink: /about/
+featured_image: /assets/images/pages/about.jpg
 ---
 
-# 그냥 이것저것 하는 사람
+Welcome, Blog.
 
-커피중독자
-![about.png](/images/about/69FD4AB6-3488-4627-9AEA-271F94A060CA.JPG){: width="50%" height="50%"}
+
+*그냥 이것저것 하는 사람*
+
+*커피 중독자*
 
 졸립다....

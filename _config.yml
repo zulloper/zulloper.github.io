@@ -1,98 +1,68 @@
-# Basic
-name:               "zulloper's Blog"
-
+# Site setings
+name: "zulloper's Blog"
+description: 'Security Engineer'
+meta_description: '-'
+logo:
+# Author image is used in site sidebar and greetings in the home page hero text
 author:
-  #facebook:         ''
-  #youtubeUser:      ''
-  #youtubeChannel:   ''
-  #twitter:          ''
-  github:           zulloper
-  #stackoverflow:    ''
-  #quora:            ''
-  #linkedin:         ''
-  #pinterest:        ''
-  #googlePlus:       ''
-  #instagram:        ''
-  #reddit:           ''
-  #medium:           ''
-  #tumblr:           ''
-  email:            zulloper@gmail.com
+  image: 'authorimage.png'
+  greetings: "Hi there! My name is zulloper. I'm a security engineer. It’s nice to meet you."
+favicon: 'assets/images/favicon.ico'
+baseurl: ''
+production_url: ''
+disqus: 'zulloper-github-io'
+mailchimp_url: ''
+# Add your GA Tracking Id
+ga_analytics: 'UA-103585557-1'
 
-copyright:
-  year:             2020
-  name:             zulloper
+# Contact form setings
+email: zulloper@email.com
+contact_page_description: "Horace theme comes with a contact form built-in. You can use this form with Formspree service and get up to 50 submissions for free. Also, you can easily switch to another service if you want."
+thankyou_page_description: "Your message has been successfully sent. We will contact you very soon!"
 
-# Google-analytics
-google-analytics:
-  id:               "UA-103585557-1"
-
-# Disqus
-disqus:
-  id:               "zulloper-github-io"
-
-# URL
-url:                "https://zulloper.github.io" # the base hostname & protocol for your site
-# url:                "http://localhost:4000" # use this url when you develop
-baseurl:            ""
-
-
-# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:           Asia/Seoul
-permalink:          /:year-:month-:day/:title/
-
-# Pagination
-paginate:           5
-paginate_path:      /page:num/
-
-# Markdown
-markdown:           kramdown
-kramdown:
-  input:            GFM
+# Social links
+twitter: 'y6eqwYrZByEugro'
+#facebook: ''
+github: 'zulloper'
+#codepen: ''
+#dribbble: ''
+#medium: ''
+#instagram: ''
+#pinterest: ''
+#linkedin: ''
+#producthunt: ''
+#quora: ''
 
 # Navigation
-nav:
-  - name:           "About"
-    url:            "/about"
-  - name:           "Archive"
-    url:            "/archive"
-  - name:           "Tags"
-    url:            "/tags"
-  - name:           "Github"
-    url:            "https://github.com/zulloper"
+navigation:
+  - text: Home
+    url: /
+  - text: About
+    url: /about
+#  - text: Style Guide
+#    url: /style-guide
+#  - text: Contact Me
+#    url: /contact
+  - text: Search
+    url: /search
+
+# Required Plugins
+plugins_dir:
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Pagination
+paginate: 5
+paginate_path: /page:num/
+
+# Permalinks
+permalink: /:title
+
+# Other
+markdown: kramdown
 
 # Sass
 sass:
-  sass_dir:         _sass
-  style:            :compressed
-
-# Scopes
-defaults:
-  -
-    scope:
-      path:         ""
-      type:         "pages"
-    values:
-      layout:       "page"
-  -
-    scope:
-      path:         ""
-      type:         "posts"
-    values:
-      layout:       "post"
-
-# jekyll-seo-tag, see: http://www.rubydoc.info/gems/jekyll-seo-tag/1.2.0
-gems:
-  - jekyll-seo-tag
-  - jekyll-paginate
-  - jekyll-admin
-
-exclude:            [vendor]
-
-tipue_search:
-  include:
-    pages: false
-    collections: []
-    exclude:
-      files: [search.html, index.html, example/, tags/index.html, tags/, about.md, archive/, archive/index.html]
-      categories: []
-      tags: []
+  sass_dir: _sass
+  style: compressed
