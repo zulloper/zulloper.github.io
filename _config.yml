@@ -43,6 +43,8 @@ navigation:
 #    url: /style-guide
 #  - text: Contact Me
 #    url: /contact
+  - text: Tags
+    url: /tags
   - text: Search
     url: /search
 
