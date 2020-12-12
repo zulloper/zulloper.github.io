@@ -1,0 +1,18 @@
+---
+layout: default
+current: category
+title: Category Page
+class: 'category-template'
+---
+
+<main id="main" class="site-main">
+    <div class="post-feed inner">
+        <header class="page-header">
+            <h1 class="page-title">{{ page.category }}</h1>
+            <p class="page-description">A collection of {{ paginator.total_posts }} {% if paginator.total_posts == 1 %}post{% else %}posts{% endif %}</p>
+        </header>
+        <div class="post-feed inner-wide">
+            {% for post in paginator.posts %}{% include postbox.html %}{% endfor %}
+        </div>
+    </div><!-- .post-feed -->
+</main><!-- .site-main -->

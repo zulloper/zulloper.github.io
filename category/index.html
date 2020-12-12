@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tags
+title: Categories
 ---
 
 <main id="main" class="site-main">
@@ -10,17 +10,18 @@ title: Tags
         </header>
         <div class="post-content inner">
             <div class="post-tags">
-                {% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
-                {% assign sortedTags = site_tags | split:',' | sort %}
-                {% for tag in sortedTags %}
-                <a href="#{{ tag | cgi_escape }}">{{ tag }} </a>
+                {% capture site_categories %}{% for category in site.categories %}{{ category | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+                {% assign sortedCategories = site_categories | split:',' | sort %}
+                {% for category in sortedCategories %}
+                <a href="#{{ category | cgi_escape }}">{{ category }} </a>
                 {% endfor %}
+
             </div><!-- .post-tags -->
-            {% for tag in sortedTags %}
-            <h2 id="{{ tag | cgi_escape }}">{{ tag }}</h2>
+            {% for category in sortedCategories %}
+            <h2 id="{{ category | cgi_escape }}">{{ category }}</h2>
             <ul class="archive-posts-list">
-                {% for post in site.tags[tag] %}
-                <li><a href="{{ site.baseurl }}{{ post.url }}" rel="bookmark">{{ post.title }}</a> 
+                {% for post in site.categories[category] %}
+                <li><a href="{{ site.baseurl }}{{ post.url }}" rel="bookmark">{{ post.title }}</a>
                     <span class="post-meta"> — <time class="published" datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%B %-d, %Y" }}</time></span>
                 </li>
                 {% endfor %}
