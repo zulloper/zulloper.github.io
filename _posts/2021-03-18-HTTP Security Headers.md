@@ -8,143 +8,119 @@ category: Pwnable
 tags: [CTF, Pwntools, Wargame]
 comments: true
 ---
-pwntoosl는 CTF Framwork 및 Exploit development  라이브러리로 Python을 통해 사용할 수 있다. 
-Wargame이나 CTF를 풀때 원격의 서버에 Raw Data(Exploit 등을 위한 hex 데이터나 Byte)를 전송할 때 주로 사용한다. 원격 뿐만 아니라 로컬의 Process에도 사용이 가능하다.
-pwntools 사용 시 보통 Python2 를 사용하지만, Python3도 지원이 가능하다.
-문제풀이에 필요한 데이터를 받거나 보내기가 가능하며, Interactive Shell도 제공한다. Data Encodine/Decoding 등, 정말 많은 기능을 제공하는데 해당 포스팅에서는 기본적인 부분만 다룬다. 
+# HTTP Security Headers
 
+## HTTP Strict Transport Security (HSTS)
 
-## Table of Contents
-* [Connection](#connection-tubes)
-	* [Local Process](#local-process)
-	* [Remote](#remote)
-	* [Secure Shell](#ssh)
-	* [Serial Port](#serial-port)
-* [Basic IO](#basic-io)
-	* [Receiving Data](#receiving-data)
-	* [Sending Data](#sending-data)
-* [Utility Functions](#utility-functions)
-	* [Packing / Unpacking](#packingunpacking)
-	* [Hex](#hex)
-	* [Base64](#base64)
-	* [Hashes](#hashes)
-	* [URL Encoding](#url-encoding)
+간단하게 해당 WEB에 접근할 때 강제로 HTTPS로 강제적으로 접근하도록하는 헤더이다. 간혹 HTTP로 접근 시 강제로 HTTPS로 접속하도록 한다.
 
-- - - -
+HTTPS를 강제하므로써 SSL Strip 공격을 방어할 수 있는 보안 헤더, 다만 서브도메인이 허용되어 있을 경우 우회할 가능성이 존재한다.
 
-## Connection (Tubes)
-Exploit을 위해 로컬이나 원격에 데이터를 송/수신을 해야한다. 이 때 대상에 따라 아래와 같이 객체로 생성하여 데이터 송/수신이 가능하다.
+브라우저 내부에 HSTS List를 구성하고 있어 헤더의 정보들이 저장된다.(max-age 등)
 
-### Local Process
-로컬 프로세스에 연결하려면 `process()` 객체에 바이너리나 프로세스 명을 입력하여 생성한다.
-```py
-from pwn import *
+|이름|설명|
+|------|---|
+|max-age|초 단위로 설정되며, 브라우저에서 설정될 시간을 나타냄|
+|includeSubdomains|해당 도메인의 서브도메인까지 설정할 것인지 나타냄|
+|preload|브라우저의 Preload list에 추가하므로써 헤더가 없더라도 list에 존재할 경우 브라우저가 강제로 HTTPS로 요청도록 함|
 
-p = process('./prcess_name')
-p.recvline()
-# 'Hello, world\n'
+Example
+
+```
+Strict-Transport-Security: max-age=<expire-time> ; includeSubDomains
+Strict-Transport-Security: max-age=<expire-time>; preload;
 ```
 
-### Remote
-`remote()` 를 통해 Host와 Port명을 입력하면 원격으로 연결이 가능하다.
-```py
-from pwn import *
+## Content-Security-Policy (CSP)
 
-io = remote('google.com', 80)
-io.send('GET /\r\n\r\n')
-io.recvline()
-# 'HTTP/1.0 200 OK\r\n'
+대표적으로 XSS을 예방하는 보안 헤더로써, 태그 및 Contents의 출처에 대한 제한 및 허용 값을 헤더 값에 포함 시켜 브라우저가 응답 값의 인라인 스크립트의 실행을 제한한다. <meta> 태그를 이용하여 응답 값에 추가할 수 있고, 응답 헤더에 사용할 수 있다.
+
+지시문(일부)
+
+|이름|설명|
+|---|---|
+|default-src|디폴트를 설정|
+|connect-src|ajax, websockets등 다른 URL 연결을 제한|
+|script-src|script 사용 시 해당 출처를 제한|
+|child-src|iframe 태그 등 inner contents를 제한|
+|style-src|CSS 출처를 제한|
+|font-src|Web Font의 출처를 제한|
+|img-src|Image의 출처를 제한|
+|media-src|media의 출처를 제한|
+|object-src|object태그 사용 시 출처를 제한|
+
+Src Values
+
+|이름|설명|
+|---|---|
+|self|현재 도메인만 허용|
+|none|모든 도메인을 제한|
+|특정 도메인 및 호스트|http://www.foo.com, foo.com:80, foo.com:443|
+|unsafe-inline|해당 항목은 인라인으로 사용되는 것을 허용|
+|nonce-'value'|nonece-'value' 라는 속성 값을 사용할 경우, 해당 항목을 허용|
+
+Example (meta tag)
+
+```html
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' trust.com *.trust.com; script-src 'nonce-aaaaaaaaaa' img-src https://*;">
 ```
 
-### SSH
-ssh를 통해 프로세스에 접근할 수 있다. 아래와 같이  `ssh()` 통해 로그인 후 session을 통해 process에 접근이 가능하다.
-```py
-rom pwn import *
+Example (Response Headers)
 
-session = ssh('user', 'host', password='password')
-
-sp = session.process('process')
-sp.recvline()
-# 'Hello, world!\n'
+```
+Content-Security-Policy: default-src 'self' trust.com *.trust.com; script-src 'nonce-aaaaaaaaaa' img-src https://*;
 ```
 
-### Serial Port
-시리얼 포트도 지원을 한다.
-```py
-from pwn import *
+Example
 
-s = serialtube('/dev/ttyUSB0', baudrate=115200)
+```html
+<script src='http://foo.com/assets/js/example.js'></script> //사용불가
+<script> alert('xss'); </script> //사용불가
+<script nonce=aaaaaaaaaa> alert('XSS'); </script> //사용가능
+
+<img src='http://foo.com/assets/img/foo.png'> //사용 불가
+<img src='https://foo.com/assets/img/foo.png'> //사용 가능
 ```
 
+## X-Frame-Options
 
-## Basic IO
-### Receiving Data
-* `recv(n)`  -  n만큼 데이터를 수신한다.
-* `recvline()`  - 개행을 만날 때 까지 데이터를 수신한다.
-* `recvuntil(data)` - 특정 데이터(문자열, 정수 등)을 만날 때 까지 데이터를 수신한다.
-* `recvregex(pattern)` - 정규표현식에 해당 하는 패턴을 만날 때 까지 데이터를 수신한다.
-* `recvrepeat(timeout)` - 타임아웃이 발생할 때 까지 데이터를 수신한다.
-* `clear()` - 버퍼에 있는 데이터를 제거한다.
+HTML에 다른 페이지나 컨텐츠를 삽입할 수 있는 `<frame>`, `<iframe>`, `<object>` 등의 태그를 이용한 ClickJacking 공격에 대응할 수 있는 보안 헤더이다.
 
-### Sending Data
-* `send(data)` - 데이터를 송신한다. 수신 측에서 Read() 함수를 사용할 경우 주로 사용한다.
-* `sendline(data)` - 데이터 끝에 개행(new line)을 포함시켜 데이터를 송신한다. 수신 측에서 scanf(), gets(), fget() 등을 사용할 때 사용한다. 
+Values
 
-## Utility Functions
-데이터를 변환하여 송/수신할 경우가 많기 때문에 아래와 같은 함수를 알고있으면 도움이 된다.
-### Packing/Unpacking
-데이터(정수)를 16/32/64 bit로 Packing/Unpacking 해주는 함수로 Hex 데이터를 전달할 때 용이하다.
-endian이나 bits는 context에 정의가 가능하여 함수마다 매개변수로 지정하지 않고 환경변수처럼 사용이 가능하다.
-```py
-pack(1234) # '\xd2\x04\x00\x00'
-unpack('\xd2\x04\x00\x00') # 1234
+|이름|설명|
+|---|---|
+|DENY|다른 페이지 및 컨텐츠를 표시 제한|
+|SAMEORIGIN|같은 도메인의 페이지 및 컨텐츠는 허용|
+|ALLOW-FROM uri|uri에 도메인을 추가하여 해당 도메인이 페이지나 컨텐츠를 허용|
 
-# 32bit
-p32(1234) # '\xd2\x04\x00\x00'
-u32('\xd2\x04\x00\x00') # 1234
 
-# 64bit
-p64(1234) # '\xd2\x04\x00\x00\x00\x00\x00\x00'
-u64('\xd2\x04\x00\x00\x00\x00\x00\x00') # 1234
+Example
 
-# Endian
-p32(1234, endian='big') # '\x00\x00\x04\xd2'
-u32('\x00\x00\x04\xd2', endian='big') # 1234
-u32('\x00\x00\x04\xd2') # 3523477504 / 엔디안 설정을 잘못할 경우 잘못된 값 출력
-
-hex(unpack('AAAA')) # '0x41414141'
+```
+X-Frame-Options: deny
+X-Frame-Options: sameorigin
+X-Frame-Options: allow-from https://example.com/
 ```
 
-### Hex
-Hex Encoding과 Decoding 기능도 제공한다.
-```py
-enhex('hello')
-# '68656c6c6f'
-unhex('776f726c64')
-# 'world'
-```
-### Base64
-Base64 Encoding과 Decoding이 가능하다.
-```py
-b64e('hello') # 'aGVsbG8='
-b64d('aGVsbG8=') # 'hello'
-```
+## X-XSS-Protection (deprecate)
 
-### Hashes
-Hash같은 경우에 md5와 sha1등을 제공한다. 
-```py
-md5sumhex('hello') == '5d41402abc4b2a76b9719d911017c592'
-# md5filehex()는 파일을 읽어서 해당 md5를 구한다.
-md5filehex(File) == '5d41402abc4b2a76b9719d911017c592'
-sha1sumhex('hello') == 'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d'
+XSS 공격을 방어하기 위한 보안 헤더로 브라우저에 내장된 XSS 필터를 통해 공격을 방지하도록한다. 응답 값에는 정상적으로 XSS 공격하였더라도 브라우저의 해당 공격을 필터링할 경우 작동되지 않도록 한다. 이는 각각 브라우저 마다 필터나 성능의 차이로 인해 차단되는 경우는 상이하다. 그로 인해 CSP 헤더 사용을 권고한다.
+
+Values
+
+|이름|설명|
+|---|---|
+|0|XSS 필터링을 비활성화|
+|1|XSS 필터링을 활성화, 탐지된 영역을 제거한 후 랜더링|
+|1; mode=block|XSS 필터링을 활성화, 공격 탐지 시 페이지 랜더링을 중단|
+|1; report=<repoting-uri>|XSS 필터링을 활성화, 공격 탐지 시 해당 uri로 리포팅 (Chromium만 지원)|
+
+[Values](https://www.notion.so/abcfc3697be140749fa57e33568b7209)
+
 ```
-
-### URL Encoding
-```py
-urlencode("Hello, World!") == '%48%65%6c%6c%6f%2c%20%57%6f%72%6c%64%21'
+X-XSS-Protection: 0; // 비활성화
+X-XSS-Protection: 1; // 활성화, 랜더링
+X-XSS-Protection: 1; mode=block // 활성화, 랜더링 중단
+X-XSS-Protection: 1; report=foo.com // 활성화, 랜더링 중단, 해당 uri로 리포팅
 ```
-
-## 참고
-Github Repository : [PWNTOOLS](https://github.com/Gallopsled/pwntools)
-
-Document : [Docs - pwntools](http://docs.pwntools.com/en/stable/#)
