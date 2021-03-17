@@ -28,15 +28,15 @@ HTTPS를 강제하므로써 SSL Strip 공격을 방어할 수 있는 보안 헤�
 |max-age|초 단위로 설정되며, 브라우저에서 설정될 시간을 나타냄|
 |includeSubdomains|해당 도메인의 서브도메인까지 설정할 것인지 나타냄|
 |preload|브라우저의 Preload list에 추가하므로써 헤더가 없더라도 list에 존재할 경우 브라우저가 강제로 HTTPS로 요청도록 함|
-
 **Example**
 ```
 Strict-Transport-Security: max-age=<expire-time> ; includeSubDomains
 Strict-Transport-Security: max-age=<expire-time>; preload;
 ```
-  
-  
-  
+<br>
+<br>
+<br>
+
 # Content-Security-Policy (CSP)
 ---
 대표적으로 XSS을 예방하는 보안 헤더로써, 태그 및 Contents의 출처에 대한 제한 및 허용 값을 헤더 값에 포함 시켜 브라우저가 응답 값의 인라인 스크립트의 실행을 제한한다.  
@@ -85,8 +85,9 @@ Content-Security-Policy: default-src 'self' trust.com *.trust.com; script-src 'n
 <img src='http://foo.com/assets/img/foo.png'> //사용 불가
 <img src='https://foo.com/assets/img/foo.png'> //사용 가능
 ```
-  
-  
+<br>
+<br>
+<br>
   
 ## X-Frame-Options
 ---
@@ -107,8 +108,9 @@ X-Frame-Options: deny
 X-Frame-Options: sameorigin
 X-Frame-Options: allow-from https://example.com/
 ```
-  
-  
+<br>
+<br>
+<br>
   
 ## X-XSS-Protection (Deprecate)
 ---
