@@ -8,8 +8,10 @@ tags: [Web, WebHacking]
 comments: true
 ---
 ## Table of Contents
-* [HTTP Strict Transport Security(HSTS)](#http-strict-transport-security(hsts))
-* [Content-Security-Policy (CSP)](#content-security-policy-(csp))
+* [HTTP Strict Transport Security(HSTS)](#http-strict-transport-security-hsts)
+* [Content-Security-Policy (CSP)](#content-security-policy-csp)
+* [X-Frame-Options](#x-frame-options)
+* [X-XSS-Protection](#x-xss-protection-deprecate)
 * [Basic IO](#basic-io)
 
 - - - -
@@ -33,7 +35,7 @@ Example
 Strict-Transport-Security: max-age=<expire-time> ; includeSubDomains
 Strict-Transport-Security: max-age=<expire-time>; preload;
 ```
-
+---
 ## Content-Security-Policy (CSP)
 
 대표적으로 XSS을 예방하는 보안 헤더로써, 태그 및 Contents의 출처에 대한 제한 및 허용 값을 헤더 값에 포함 시켜 브라우저가 응답 값의 인라인 스크립트의 실행을 제한한다. <meta> 태그를 이용하여 응답 값에 추가할 수 있고, 응답 헤더에 사용할 수 있다.
@@ -81,7 +83,7 @@ Example
 <img src='http://foo.com/assets/img/foo.png'> //사용 불가
 <img src='https://foo.com/assets/img/foo.png'> //사용 가능
 ```
-
+---
 ## X-Frame-Options
 
 HTML에 다른 페이지나 컨텐츠를 삽입할 수 있는 `<frame>`, `<iframe>`, `<object>` 등의 태그를 이용한 ClickJacking 공격에 대응할 수 있는 보안 헤더이다.
@@ -102,9 +104,8 @@ X-Frame-Options: sameorigin
 X-Frame-Options: allow-from https://example.com/
 ```
 
-
-
-## X-XSS-Protection (deprecate)
+---
+## X-XSS-Protection (Deprecate)
 
 XSS 공격을 방어하기 위한 보안 헤더로 브라우저에 내장된 XSS 필터를 통해 공격을 방지하도록한다. 응답 값에는 정상적으로 XSS 공격하였더라도 브라우저의 해당 공격을 필터링할 경우 작동되지 않도록 한다. 이는 각각 브라우저 마다 필터나 성능의 차이로 인해 차단되는 경우는 상이하다. 그로 인해 CSP 헤더 사용을 권고한다.
 
