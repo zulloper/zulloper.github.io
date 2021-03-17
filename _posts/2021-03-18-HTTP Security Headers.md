@@ -12,8 +12,6 @@ comments: true
 * [Content-Security-Policy (CSP)](#content-security-policy-csp)
 * [X-Frame-Options](#x-frame-options)
 * [X-XSS-Protection](#x-xss-protection-deprecate)
-* [Basic IO](#basic-io)
-
 - - - -
 
 ## HTTP Strict Transport Security (HSTS)
@@ -110,7 +108,6 @@ X-Frame-Options: allow-from https://example.com/
 XSS 공격을 방어하기 위한 보안 헤더로 브라우저에 내장된 XSS 필터를 통해 공격을 방지하도록한다. 응답 값에는 정상적으로 XSS 공격하였더라도 브라우저의 해당 공격을 필터링할 경우 작동되지 않도록 한다. 이는 각각 브라우저 마다 필터나 성능의 차이로 인해 차단되는 경우는 상이하다. 그로 인해 CSP 헤더 사용을 권고한다.
 
 Values
-
 |이름|설명|
 |---|---|
 |0|XSS 필터링을 비활성화|
