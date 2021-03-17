@@ -3,19 +3,26 @@ layout: post
 title: "HTTP Security Headers"
 description: "-"
 date: 2021-03-18
-category: Web
+category: WebHacking
 tags: [Web, WebHacking]
 comments: true
 ---
 # HTTP Security Headers
 
+## Table of Contents
+* [HTTP Strict Transport Security(HSTS)](#http-strict-transport-security-(hsts))
+* [Basic IO](#basic-io)
+* [Basic IO](#basic-io)
+
+- - - -
+
 ## HTTP Strict Transport Security (HSTS)
 
 간단하게 해당 WEB에 접근할 때 강제로 HTTPS로 강제적으로 접근하도록하는 헤더이다. 간혹 HTTP로 접근 시 강제로 HTTPS로 접속하도록 한다.
-
 HTTPS를 강제하므로써 SSL Strip 공격을 방어할 수 있는 보안 헤더, 다만 서브도메인이 허용되어 있을 경우 우회할 가능성이 존재한다.
-
 브라우저 내부에 HSTS List를 구성하고 있어 헤더의 정보들이 저장된다.(max-age 등)
+
+Values
 
 |이름|설명|
 |------|---|
@@ -24,7 +31,6 @@ HTTPS를 강제하므로써 SSL Strip 공격을 방어할 수 있는 보안 헤�
 |preload|브라우저의 Preload list에 추가하므로써 헤더가 없더라도 list에 존재할 경우 브라우저가 강제로 HTTPS로 요청도록 함|
 
 Example
-
 ```
 Strict-Transport-Security: max-age=<expire-time> ; includeSubDomains
 Strict-Transport-Security: max-age=<expire-time>; preload;
@@ -59,19 +65,16 @@ Src Values
 |nonce-'value'|nonece-'value' 라는 속성 값을 사용할 경우, 해당 항목을 허용|
 
 Example (meta tag)
-
 ```html
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' trust.com *.trust.com; script-src 'nonce-aaaaaaaaaa' img-src https://*;">
 ```
 
 Example (Response Headers)
-
 ```
 Content-Security-Policy: default-src 'self' trust.com *.trust.com; script-src 'nonce-aaaaaaaaaa' img-src https://*;
 ```
 
 Example
-
 ```html
 <script src='http://foo.com/assets/js/example.js'></script> //사용불가
 <script> alert('xss'); </script> //사용불가
@@ -95,12 +98,13 @@ Values
 
 
 Example
-
 ```
 X-Frame-Options: deny
 X-Frame-Options: sameorigin
 X-Frame-Options: allow-from https://example.com/
 ```
+
+
 
 ## X-XSS-Protection (deprecate)
 
@@ -115,8 +119,7 @@ Values
 |1; mode=block|XSS 필터링을 활성화, 공격 탐지 시 페이지 랜더링을 중단|
 |1; report=<repoting-uri>|XSS 필터링을 활성화, 공격 탐지 시 해당 uri로 리포팅 (Chromium만 지원)|
 
-[Values](https://www.notion.so/abcfc3697be140749fa57e33568b7209)
-
+Example
 ```
 X-XSS-Protection: 0; // 비활성화
 X-XSS-Protection: 1; // 활성화, 랜더링
