@@ -7,11 +7,9 @@ category: WebHacking
 tags: [Web, WebHacking]
 comments: true
 ---
-# HTTP Security Headers
-
 ## Table of Contents
-* [HTTP Strict Transport Security(HSTS)](#http-strict-transport-security-(hsts))
-* [Basic IO](#basic-io)
+* [HTTP Strict Transport Security(HSTS)](#http-strict-transport-security(hsts))
+* [Content-Security-Policy (CSP)](#content-security-policy-(csp))
 * [Basic IO](#basic-io)
 
 - - - -
