@@ -119,3 +119,5 @@ If you want to host your site on Amazon S3, you can do so by using the [s3_websi
 The documentation included provides all the information you need to get started with the theme. However, if you have any questions you can email us at support@justgoodthemes.com, and we will be happy to help you.
 
 *Also, if you have any bug reports, or feature requests, please let us know!*
+
+test
