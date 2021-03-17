@@ -15,7 +15,7 @@ comments: true
   
   
   
-## HTTP Strict Transport Security (HSTS)
+# HTTP Strict Transport Security (HSTS)
 ---
 간단하게 해당 WEB에 접근할 때 강제로 HTTPS로 강제적으로 접근하도록하는 헤더이다. 간혹 HTTP로 접근 시 강제로 HTTPS로 접속하도록 한다.  
 HTTPS를 강제하므로써 SSL Strip 공격을 방어할 수 있는 보안 헤더, 다만 서브도메인이 허용되어 있을 경우 우회할 가능성이 존재한다.  
@@ -37,7 +37,7 @@ Strict-Transport-Security: max-age=<expire-time>; preload;
   
   
   
-## Content-Security-Policy (CSP)
+# Content-Security-Policy (CSP)
 ---
 대표적으로 XSS을 예방하는 보안 헤더로써, 태그 및 Contents의 출처에 대한 제한 및 허용 값을 헤더 값에 포함 시켜 브라우저가 응답 값의 인라인 스크립트의 실행을 제한한다.  
 <meta> 태그를 이용하여 응답 값에 추가할 수 있고, 응답 헤더에 사용할 수 있다.
