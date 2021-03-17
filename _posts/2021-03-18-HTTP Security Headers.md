@@ -1,11 +1,10 @@
 ---
 layout: post
-title: "Pwntools 사용법"
+title: "HTTP Security Headers"
 description: "-"
-#featured_image: /assets/images/posts/2018/12/5.gif
-date: 2020-08-09
-category: Pwnable
-tags: [CTF, Pwntools, Wargame]
+date: 2021-03-18
+category: Web
+tags: [Web, WebHacking]
 comments: true
 ---
 # HTTP Security Headers
