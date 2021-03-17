@@ -35,7 +35,6 @@ Strict-Transport-Security: max-age=<expire-time>; preload;
 ```
 <br>
 <br>
-<br>
 
 # Content-Security-Policy (CSP)
 ---
@@ -87,7 +86,6 @@ Content-Security-Policy: default-src 'self' trust.com *.trust.com; script-src 'n
 ```
 <br>
 <br>
-<br>
   
 ## X-Frame-Options
 ---
@@ -108,7 +106,6 @@ X-Frame-Options: deny
 X-Frame-Options: sameorigin
 X-Frame-Options: allow-from https://example.com/
 ```
-<br>
 <br>
 <br>
   
