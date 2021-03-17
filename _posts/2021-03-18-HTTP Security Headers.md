@@ -27,7 +27,8 @@ HTTPS를 강제하므로써 SSL Strip 공격을 방어할 수 있는 보안 헤�
 |------|---|
 |max-age|초 단위로 설정되며, 브라우저에서 설정될 시간을 나타냄|
 |includeSubdomains|해당 도메인의 서브도메인까지 설정할 것인지 나타냄|
-|preload|브라우저의 Preload list에 추가하므로써 헤더가 없더라도 list에 존재할 경우 브라우저가 강제로 HTTPS로 요청도록 함|
+|preload|브라우저의 Preload list에 추가하므로써 헤더가 없더라도 list에 존재할 경우 브라우저가 강제로 HTTPS로 요청도록 함|  
+
 **Example**
 ```
 Strict-Transport-Security: max-age=<expire-time> ; includeSubDomains
